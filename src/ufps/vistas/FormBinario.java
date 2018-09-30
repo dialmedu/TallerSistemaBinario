@@ -483,16 +483,18 @@ public class FormBinario extends javax.swing.JFrame {
     }
     
     private void cargarDatos(String datos){
-         crearBinarios(datos);
+         setSistemaBinario(datos);
          mostrarBinarios();
     }
     
-    private void crearBinarios(String datos){
+    private void setSistemaBinario(String datos){
         if(false == datos.isEmpty() ){
             String[] binarios = datos.split(",");
             if(binarios.length > 0){
+                this.mySistemaBinario = new SistemaBinario();
                 for (String registro : binarios) {
                     if(false == registro.isEmpty()){
+                        
                         this.mySistemaBinario.add(new Binario(registro));
                     }
                 }
@@ -591,7 +593,11 @@ public class FormBinario extends javax.swing.JFrame {
         int binario1 = comboOperacionBinario1.getSelectedIndex();
         String operacion = this.comboOperacion.getSelectedItem().toString();
         int binario2 = comboOperacionBinario2.getSelectedIndex();
-        textOperacionResultado.setText(this.getOperacion(operacion, binario1, binario2));
+        if(binario1 != -1 && binario2 != -1){
+            String resultado = this.getOperacion(operacion, binario1, binario2);
+            textOperacionResultado.setText(resultado); 
+        }
+        
     }
     
     private String getOperacion(String operacion, int binario1, int binario2){

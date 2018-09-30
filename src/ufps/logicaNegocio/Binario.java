@@ -51,6 +51,7 @@ public class Binario {
         return result;
     }
 
+   
     
     @Override
     public boolean equals(Object obj) {
@@ -72,6 +73,26 @@ public class Binario {
         int hash = 5;
         hash = 97 * hash + Arrays.deepHashCode(this.bins);
         return hash;
+    }
+
+    public Boolean[] getBins() {
+        return bins;
+    }
+    
+    public int[] integerValue(){
+         int[] ints = new int[0];
+        if(this.bins != null && this.bins.length > 0){
+            ints = new int[this.bins.length];
+            for( int i = 0; i < this.bins.length; i++){
+                boolean bin = this.bins[i];
+                ints[i] =  bin ? 1 : 0; 
+            }
+        }
+        return ints;
+    }
+
+    public void setBins(Boolean[] bins) {
+        this.bins = bins;
     }
     
     
