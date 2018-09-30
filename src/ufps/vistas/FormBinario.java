@@ -607,6 +607,7 @@ public class FormBinario extends javax.swing.JFrame {
         }
         if(operacion.equalsIgnoreCase("-") ){
             resultado = this.mySistemaBinario.getResta(binario1, binario2).toString();
+            resultado += "   ( " + this.mySistemaBinario.formatBinResta(resultado) + " ) ";
         }
         if(operacion.equalsIgnoreCase("*")){
             resultado = this.mySistemaBinario.getMultiplica(binario1, binario2).toString();

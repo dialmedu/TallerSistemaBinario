@@ -175,16 +175,24 @@ public class SistemaBinario implements OperacionBinario {
         // PARA INICIAR LA RESTA
         int acarreo=0;
         for (int j=dim-1; j >= 0; j--) {
-            int bin1 = resta(acarreo,cadena[j]);
+            int bin1;
+            if (acarreo == 1) {
+                bin1= resta(cadena[j],acarreo);
+                if(isAcarreoResta(cadena[j],acarreo)){
+                    acarreo=1;
+                }else{
+                    acarreo = 0;
+                }
+            } else{
+                bin1= cadena[j];
+            }
             int bin2 = cdena[j];
             int resta = resta(bin1,bin2);
             result =  String.valueOf(resta) + result;
 
             // luego valido si llevo acarreo
-            if( isAcarreoResta(acarreo,cadena[j])  || isAcarreoResta(bin1,bin2) ){
+            if(acarreo == 0 && isAcarreoResta(bin1,bin2)){
                 acarreo = 1;
-            }else{
-                acarreo = 0;
             }
         }
         if(acarreo == 1){
@@ -195,6 +203,24 @@ public class SistemaBinario implements OperacionBinario {
      
     private boolean isAcarreoResta(int bin1, int bin2){
         return (bin1 == 0 && bin2 == 1);
+    }
+    
+    public String formatBinResta(String valor){
+        String[] cadena = valor.split("");
+        if(cadena.length == 3){
+            if(cadena[0] == "0"){
+                return valor.substring(1, valor.length());
+            }
+        }
+        if(cadena.length > 3){
+            String bin1 = cadena[0];
+            String bin2 = cadena[1];
+            int int1 = Integer.parseInt(bin1);
+            int int2 = Integer.parseInt(bin2);
+            valor = valor.substring(2, valor.length());
+            return  resta(int1, int2) == 0 ? "-" + valor : valor;
+        }
+        return valor;
     }
      
     private int resta( int bin1, int bin2 ){
