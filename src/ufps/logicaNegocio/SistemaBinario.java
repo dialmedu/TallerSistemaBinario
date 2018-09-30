@@ -63,50 +63,19 @@ public class SistemaBinario implements OperacionBinario {
 
     @Override
     public Binario getResta(int indiceBinario1, int indiceBinario2) {
-        String cad2= String.valueOf(indiceBinario1);;
-        String cad3= String.valueOf(indiceBinario2);
-        int cadena[]= new int[20];
-        int cdena[]= new int[20];
-        int cdenamd[]= new int[20];
-        int result[]= new int[20];
-        int i, dim=0, dim2=0;
-        //resta
-        System.out.println("");
-        int acarreo2=0;
-        int result2[]= new int[20];
-        for (i =dim-1; i >= 0; i--) {
-            if (acarreo2==1) {
-                cadena[i]= cadena[i]- acarreo2;
-                if (cadena[i]==0) {
-                    cadena[i]=0;
-                } else{
-                cadena[i]=1; }
-            }
-            result2[i+1]= cadena[i]- cdenamd[i];
-            if (result2[i+1]== -1) {
-                acarreo2=1;
-                result2[i+1]=1;
-            }else{
-                if (result2[i+1]==1) {
-                    acarreo2=0;
-                    result2[i]=1;
-                } else{
-                    if (result2[i+1]== 0) {
-                        acarreo2=0;
-                        result2[i]=0;
-                    }
-                }
-            }
-        }
-        String suma2="";
-        if (acarreo2==1) 
-            result2[0]=acarreo2;
-        System.out.println("resta: ");
-            for (int k = 0; k < dim+1; k++) {
-                //suma2 += System.out.print(result2[k]+" ");
-                suma2+= String.valueOf(result2[k]+" ");
-            }
-        return new Binario(suma2);    
+        Binario binario1 = this.getBinario(indiceBinario1);
+        Binario binario2 = this.getBinario(indiceBinario2);       
+        return getResta(binario1,binario2);
+    }
+    
+     public Binario getResta(String valor1, String valor2) {
+        Binario binario1 = new Binario(valor2);
+        Binario binario2 = new Binario(valor2);
+        return getResta(binario1, binario2);
+    }
+    
+    public Binario getResta(Binario binario1, Binario binario2) {
+        return getResta(binario1.integerValue(),binario2.integerValue());    
     }
 
     @Override
@@ -133,122 +102,53 @@ public class SistemaBinario implements OperacionBinario {
 
     @Override
     public Binario getSuma(int indiceBinario1, int indiceBinario2) {
-        /** String cad2= new String();
-        String cad3= new String();
-        String cad2= String.valueOf(indiceBinario1);
-        String cad3= String.valueOf(indiceBinario2); **/
-        String cad2= this.getBinario(indiceBinario1).toString();
-        String cad3= this.getBinario(indiceBinario2).toString();
-        int cadena[]= this.getBinario(indiceBinario1).integerValue();
-        int cdena[]=  this.getBinario(indiceBinario1).integerValue();
-        int cdenamd[]= new int[20];
-        String result= "";
-        int i, dim = cadena.length, dim2 = cdena.length;
+        Binario binario1 = this.getBinario(indiceBinario1);
+        Binario binario2 = this.getBinario(indiceBinario2);
+        return getSuma(binario1, binario2);
         
-//        Scanner dato= new Scanner(System.in);
-//        System.out.println("suma");
-//        System.out.println("n1");
-//       // cad2= dato.nextLine();
-//         cad2= cad2;
-//         
-//        for (i = 0; i < cad2.length(); i++) {
-//            //transforma la cadena en un int
-//            if (cad2.charAt(i) == 48){ 
-//                cadena[i]=0;
-//            }
-//        else{
-//               cadena[i]=1;    }
-//    }
-        
-//        dim= i;
-//        System.out.println("n2");
-//        //cad3= dato.nextLine();
-//        cad3=cad3;
-//        
-//        for (i = 0; i < cad3.length(); i++) {
-//            if (cad3.charAt(i) == 48) {
-//                cdena[i]=0;
-//            } else{
-//               cdena[i]=1;    }
-//    }
-//        
-////    dim2= i;
-    // DARLE AL MISMA DIMENSION
-    if(cadena.length < cdena.length){
-        cadena = this.redimBinario(cadena, cdena.length);
-        dim = cdena.length;
-    }else{
-        cdena = this.redimBinario(cdena, cadena.length);
-        dim =  cadena.length;
     }
     
-//    int j=0;
-//        for (int k = 0; k < dim; k++) {
-//            if (k<(dim-dim2)) {
-//                cdenamd[k]=0;
-//            }else{
-//                cdenamd[k]=cdena[j];
-//                j++;
-//            }
-//        }
-//        System.out.println("numero 1:");
-//        for (i = 0; i < dim; i++) {
-//            System.out.print(cadena[i]+"  ");
-//        }
-//     System.out.println("");    
-//    System.out.println("numero 2");
-//        for (int l = 0; l < dim; l++) {
-//            System.out.print(cdenamd[l]+"  ");
-//        }
-    //suma    
-//    System.out.println(dim);
-
+    public Binario getSuma(String valor1, String valor2) {
+        Binario binario1 = new Binario(valor2);
+        Binario binario2 = new Binario(valor2);
+        return getSuma(binario1, binario2);
+    }
     
-
-    int acarreo=0;
-        for (i=dim-1; i >= 0; i--) {
-//            if (acarreo==1) {
-//                cadena[i]= cadena[i]+acarreo;
-//                if (cadena[i]==2) {
-////                    acarreo=1;
-//                    cadena[i]=0;
-//                }
-//            }
-            
-            int bin1 = suma(acarreo,cadena[i]);
-            int bin2 = cdena[i];
+    private Binario getSuma(Binario binario1, Binario binario2){
+        int cadena[]= binario1.integerValue();
+        int cdena[]=  binario2.integerValue();
+        return getSuma(cadena,cdena);
+    }
+    
+    private Binario getSuma(int[] cadena, int[] cdena){
+        int dim;
+        String result = "";
+        // DARLE AL MISMA DIMENSION
+        if(cadena.length < cdena.length){
+            cadena = this.redimBinario(cadena, cdena.length);
+            dim = cdena.length;
+        }else{
+            cdena = this.redimBinario(cdena, cadena.length);
+            dim =  cadena.length;
+        }
+        // PARA INICIAR LA SUMA
+        int acarreo=0;
+        for (int j=dim-1; j >= 0; j--) {
+            int bin1 = suma(acarreo,cadena[j]);
+            int bin2 = cdena[j];
             int suma = suma(bin1,bin2);
             result =  String.valueOf(suma) + result;
-           
+
             // luego valido si llevo acarreo
-            if( (acarreo == 1 && cadena[i] == 1) || ( bin1 == 1 && bin2 == 1)){
+            if( (acarreo == 1 && cadena[j] == 1) || ( bin1 == 1 && bin2 == 1)){
                 acarreo = 1;
             }else{
                 acarreo = 0;
             }
-            
-            /*result[i+1]= cadena[i]+cdena[i];
-                if (result[i+1] == 2) {
-                    acarreo=1;
-                    result[i+1]=0;
-                }else{
-                    acarreo=0;
-                }   */
         }
         if(acarreo == 1){
             result = String.valueOf(acarreo) + result;
         }
-//        
-//        if (acarreo==1) 
-//            result[0]= acarreo;
-//        String suma="";
-//             System.out.println("");
-//             System.out.println("Suma:");
-//            for (i= 0; i<dim+1; i++) {
-//                //System.out.print(result[i]+" ");
-//            suma+= String.valueOf(result[i]+" ");    
-//            }
-            
         return new Binario(result);
     }
     
@@ -258,6 +158,51 @@ public class SistemaBinario implements OperacionBinario {
         }else
         {
             return bin1 + bin2;
+        }
+    }
+    
+    public Binario getResta(int[] cadena, int[] cdena){
+        int dim;
+        String result = "";
+        // DARLE AL MISMA DIMENSION
+        if(cadena.length < cdena.length){
+            cadena = this.redimBinario(cadena, cdena.length);
+            dim = cdena.length;
+        }else{
+            cdena = this.redimBinario(cdena, cadena.length);
+            dim =  cadena.length;
+        }
+        // PARA INICIAR LA RESTA
+        int acarreo=0;
+        for (int j=dim-1; j >= 0; j--) {
+            int bin1 = resta(acarreo,cadena[j]);
+            int bin2 = cdena[j];
+            int resta = resta(bin1,bin2);
+            result =  String.valueOf(resta) + result;
+
+            // luego valido si llevo acarreo
+            if( isAcarreoResta(acarreo,cadena[j])  || isAcarreoResta(bin1,bin2) ){
+                acarreo = 1;
+            }else{
+                acarreo = 0;
+            }
+        }
+        if(acarreo == 1){
+            result = String.valueOf(acarreo) + result;
+        }
+        return new Binario(result);
+    }
+     
+    private boolean isAcarreoResta(int bin1, int bin2){
+        return (bin1 == 0 && bin2 == 1);
+    }
+     
+    private int resta( int bin1, int bin2 ){
+        if( bin1 == 0 && bin2 == 1){
+            return 1;
+        }else
+        {
+            return bin1 - bin2;
         }
     }
     
@@ -357,13 +302,15 @@ public class SistemaBinario implements OperacionBinario {
     }
     
     private Binario getBinario(int i){
-        if(this.binarios.length > 0){
-            try{
-                return this.binarios[i];
-            }catch(Exception ex){
-                ex.printStackTrace();
-            } 
+        if(this.binarios != null){
+            if(this.binarios.length > 0){
+                try{
+                    return this.binarios[i];
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                } 
+            }
         }
-        return null;
+        return new Binario();
     }
 }
