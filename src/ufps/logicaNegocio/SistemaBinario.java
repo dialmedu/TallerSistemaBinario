@@ -95,10 +95,37 @@ public class SistemaBinario implements OperacionBinario {
     }
 
     @Override
-    public Binario getMultiplica(int indiceBInario1, int indiceBinario2) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-       return new Binario("");
+    public Binario getMultiplica(int indiceBinario1, int indiceBinario2) {
+         Binario binario1 = this.getBinario(indiceBinario1);
+         Binario binario2 = this.getBinario(indiceBinario2);
+        return getMultiplica(binario1, binario2);
     }
+    
+    private Binario getMultiplica(Binario binario1, Binario binario2) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Binario[] productos = new Binario[binario1.getBins().length];
+       int countProductos = 0;
+       // multiplico los factores
+       for( int multiplicador : binario1.getInt()){
+           String producto = "";
+           int[] multiplicando = binario2.getInt();
+           for(int j = multiplicando.length-1; j >= 0;  j--){
+               producto = String.valueOf( multiplicador * multiplicando[j]) + producto;
+           }
+           for(int j = 0; j < countProductos; j++ ){
+               producto += "0";
+           }
+           productos[countProductos] = new Binario(producto);
+           countProductos++;
+       }
+       // sumo los productos
+       Binario resultado = new Binario("0");
+       for(Binario producto : productos){
+           resultado = this.getSuma(resultado, producto);
+       }
+       return resultado;
+    }
+    
 
     @Override
     public long getDecimal(int indice_Del_Binario) {
