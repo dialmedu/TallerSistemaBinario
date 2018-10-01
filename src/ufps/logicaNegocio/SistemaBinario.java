@@ -18,12 +18,12 @@ public class SistemaBinario implements OperacionBinario {
         if(this.binarios != null && this.binarios.length < pos){
             return this.binarios[pos];
         }
-        return null;
+        return new Binario("");
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "SistemaBinario{" + "binarios=" + Arrays.toString(binarios) + '}';
     }
 
     public void add(Binario nuevo) {
@@ -41,24 +41,40 @@ public class SistemaBinario implements OperacionBinario {
 
     @Override
     public Binario[] getMas_SeRepite() {
-        Binario[][] maxBinario = new  Binario[this.binarios.length][];
+        Binario[][] maxBinario = new  Binario[this.binarios.length][this.binarios.length];
         int maxRepeticiones = 0;
+        int indiceMaxRepeticiones = 0;
         for ( int j = 0; j <  this.binarios.length; j++){
-               maxBinario[j][0] = this.binarios[j];
+            maxBinario[j][0] = this.binarios[j];
             for(int k = 0; k < this.binarios.length; k++){
                 if( maxBinario[j][0].equals(this.binarios[k]) ){
+                    Binario[][] auxMaxBinario = maxBinario;
+                    maxBinario = new Binario[this.binarios.length][k];
+                    System.arraycopy(auxMaxBinario, 0,maxBinario , 0, maxBinario.length);
                     maxBinario[j][k] = this.binarios[k]; 
                 }
             }
-            if(maxBinario[j].length > maxRepeticiones){
-                maxRepeticiones = maxBinario[j].length;
+            int countRepeticiones = 0;
+            for(Binario bin : maxBinario[j] ){
+                if(bin != null){
+                    countRepeticiones++;
+                }
+            }
+            if(countRepeticiones > maxRepeticiones){
+                maxRepeticiones = countRepeticiones;
+                indiceMaxRepeticiones = j;
             }
         }
-        return maxBinario[maxRepeticiones];
+        return maxBinario[indiceMaxRepeticiones];
     }
   
+    @Override
     public Binario getSumaTotal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Binario resultado = new Binario("0");
+        for( Binario sumando : this.getBinarios()){
+            resultado = this.getSuma(resultado, sumando);
+        }
+        return resultado;
     }
 
     @Override
@@ -75,28 +91,35 @@ public class SistemaBinario implements OperacionBinario {
     }
     
     public Binario getResta(Binario binario1, Binario binario2) {
-        return getResta(binario1.integerValue(),binario2.integerValue());    
+        return getResta(binario1.getInt(),binario2.getInt());    
     }
 
     @Override
     public Binario getMultiplica(int indiceBInario1, int indiceBinario2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return new Binario("");
     }
 
     @Override
     public long getDecimal(int indice_Del_Binario) {
         //binario a decimal
-        int  cifra, resultado=0, exp=0;
-        int n;
-         Scanner dato= new Scanner(System.in);
-        n= dato.nextInt();
+        Binario binario = this.getBinario(indice_Del_Binario);
+        return getDecimal(binario);
+    }
+    
+    private long getDecimal(Binario binario) {
+        //binario a decimal
+        int  n,cifra, resultado=0, exp=0;
+        if(null == binario ){
+            return 0;
+        }
+        n = binario.getIntegerValue();
         do {
             cifra= n % 10;
             resultado= resultado+ cifra* (int)Math.pow(2,exp);
             exp++;
             n=n/10;
         } while (n>0);
-        System.out.println("num decimal: "+resultado);
         return resultado;
     }
 
@@ -115,8 +138,8 @@ public class SistemaBinario implements OperacionBinario {
     }
     
     private Binario getSuma(Binario binario1, Binario binario2){
-        int cadena[]= binario1.integerValue();
-        int cdena[]=  binario2.integerValue();
+        int cadena[]= binario1.getInt();
+        int cdena[]=  binario2.getInt();
         return getSuma(cadena,cdena);
     }
     
@@ -208,7 +231,7 @@ public class SistemaBinario implements OperacionBinario {
     public String formatBinResta(String valor){
         String[] cadena = valor.split("");
         if(cadena.length == 3){
-            if(cadena[0] == "0"){
+            if("0".equals(cadena[0])){
                 return valor.substring(1, valor.length());
             }
         }
@@ -251,14 +274,18 @@ public class SistemaBinario implements OperacionBinario {
 
     @Override
     public String getHexaDecimal(int indice_Del_Binario) {
-        //binario a hexa
-       // Scanner dato= new Scanner(System.in);
+        Binario binario = this.getBinario(indice_Del_Binario);
+        return getHexaDecimal(binario);
+    }
+    
+    public String getHexaDecimal(Binario binario) {
         int n, cont=0, aux, acum=0;
         String resultado="";
-        System.out.println("num: ");
-        //n= dato.nextInt(); 
-        //n= String.valueOf(indice_Del_Binario);
-        n= 1001;
+        
+        if(null == binario){
+            return "";
+        }
+        n= binario.getIntegerValue();
         while(n>0){
             acum=0;
             cont=0;
@@ -304,19 +331,35 @@ public class SistemaBinario implements OperacionBinario {
                }
             }
         }
-         resultado= " "+resultado; 
-         //System.out.println("Resultado: "+resultado);
-        return resultado+= "Resultado: "+resultado;
+        return resultado;
     }
 
     @Override
     public Binario getMenor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Binario menor = new Binario("");
+        if( this.binarios != null && this.binarios.length > 0){
+            menor = this.getBinario(0);
+            for(Binario bin : this.binarios){
+                if(this.getDecimal(bin) < this.getDecimal(menor)){
+                    menor = bin;
+                }
+            }
+        }
+        return menor;
     }
 
     @Override
     public Binario getMayor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Binario mayor = new Binario("");
+        if( this.binarios != null && this.binarios.length > 0){
+            mayor = this.getBinario(0);
+            for(Binario bin : this.binarios){
+                if(this.getDecimal(bin) > this.getDecimal(mayor)){
+                    mayor = bin;
+                }
+            }
+        }
+        return mayor;
     }
 
     public int getI() {

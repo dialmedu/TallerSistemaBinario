@@ -79,7 +79,7 @@ public class Binario {
         return bins;
     }
     
-    public int[] integerValue(){
+    public int[] getInt(){
          int[] ints = new int[0];
         if(this.bins != null && this.bins.length > 0){
             ints = new int[this.bins.length];
@@ -89,6 +89,15 @@ public class Binario {
             }
         }
         return ints;
+    }
+    
+    public int getIntegerValue(){
+        int integerValue = 0;
+        String stringBins = this.toString();
+        if(false == stringBins.isEmpty()){
+            integerValue = Integer.parseInt(stringBins);
+        }
+        return integerValue;
     }
 
     public void setBins(Boolean[] bins) {

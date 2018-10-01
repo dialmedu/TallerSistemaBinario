@@ -6,6 +6,7 @@
 package ufps.vistas;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import ufps.logicaNegocio.Binario;
 import ufps.logicaNegocio.SistemaBinario;
 
@@ -17,12 +18,17 @@ public class FormBinario extends javax.swing.JFrame {
 
     
     private SistemaBinario mySistemaBinario;
+    
+    String editar = "Editar";
+    String cargar = "Cargar Datos";
+    
     /**
      * Creates new form FormBinario
      */
     public FormBinario() {
         initComponents();
         this.mySistemaBinario = new SistemaBinario();
+        this.disabledAll();
     }
 
     /**
@@ -46,12 +52,7 @@ public class FormBinario extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        textDatos = new javax.swing.JTextField();
-        toggleCargarDatos = new javax.swing.JToggleButton();
-        botonBorrarDatos = new javax.swing.JButton();
+        jPanelBody = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         comboOperacionBinario1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -61,6 +62,12 @@ public class FormBinario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         textOperacionResultado = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        textDatos = new javax.swing.JTextField();
+        toggleCargarDatos = new javax.swing.JToggleButton();
+        botonBorrarDatos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         comboConversionBinario1 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
@@ -171,75 +178,9 @@ public class FormBinario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Sistema Binario");
+        jPanelBody.setBackground(new java.awt.Color(247, 247, 247));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Carga de Datos"));
-
-        jLabel2.setText("Digite los binarios separados por \",\":");
-
-        textDatos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        textDatos.setText("11, 101, 1111, 0101");
-        textDatos.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textDatosFocusLost(evt);
-            }
-        });
-        textDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textDatosActionPerformed(evt);
-            }
-        });
-        textDatos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                textDatosKeyPressed(evt);
-            }
-        });
-
-        toggleCargarDatos.setText("Cargar Datos");
-        toggleCargarDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleCargarDatosActionPerformed(evt);
-            }
-        });
-
-        botonBorrarDatos.setText("Borrar Datos");
-        botonBorrarDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBorrarDatosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(textDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(toggleCargarDatos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonBorrarDatos)))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(toggleCargarDatos)
-                    .addComponent(botonBorrarDatos)))
-        );
-
+        jPanel2.setBackground(new java.awt.Color(247, 247, 247));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
 
         comboOperacionBinario1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -322,6 +263,82 @@ public class FormBinario extends javax.swing.JFrame {
                     .addComponent(textOperacionResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Carga de Datos"));
+
+        jLabel2.setText("Digite los binarios separados por \",\":");
+
+        textDatos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        textDatos.setText("11, 101, 1111, 0101");
+        textDatos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textDatosFocusLost(evt);
+            }
+        });
+        textDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDatosActionPerformed(evt);
+            }
+        });
+        textDatos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textDatosKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textDatosKeyReleased(evt);
+            }
+        });
+
+        toggleCargarDatos.setText("Cargar Datos");
+        toggleCargarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleCargarDatosActionPerformed(evt);
+            }
+        });
+
+        botonBorrarDatos.setText("Borrar Datos");
+        botonBorrarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarDatosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(textDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(toggleCargarDatos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonBorrarDatos)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(textDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toggleCargarDatos)
+                    .addComponent(botonBorrarDatos)))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 54));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Sistema Binario");
+
+        jPanel4.setBackground(new java.awt.Color(247, 247, 247));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Conversiones"));
 
         comboConversionBinario1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -352,6 +369,7 @@ public class FormBinario extends javax.swing.JFrame {
         textConversionResultado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         textConversionResultado.setText("3");
 
+        jPanel5.setBackground(new java.awt.Color(247, 247, 247));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones Adicionales"));
 
         comboOperacionAdicional.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -438,37 +456,49 @@ public class FormBinario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout jPanelBodyLayout = new javax.swing.GroupLayout(jPanelBody);
+        jPanelBody.setLayout(jPanelBodyLayout);
+        jPanelBodyLayout.setHorizontalGroup(
+            jPanelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBodyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelBodyLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(8, Short.MAX_VALUE)))
+        );
+        jPanelBodyLayout.setVerticalGroup(
+            jPanelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBodyLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(334, Short.MAX_VALUE))
+            .addGroup(jPanelBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelBodyLayout.createSequentialGroup()
+                    .addGap(162, 162, 162)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 15, Short.MAX_VALUE))))
+            .addComponent(jPanelBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -477,51 +507,7 @@ public class FormBinario extends javax.swing.JFrame {
     private void toggleCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleCargarDatosActionPerformed
        cargarDatos();
     }//GEN-LAST:event_toggleCargarDatosActionPerformed
-    
-    private void cargarDatos(){
-        cargarDatos(textDatos.getText());
-    }
-    
-    private void cargarDatos(String datos){
-         setSistemaBinario(datos);
-         mostrarBinarios();
-    }
-    
-    private void setSistemaBinario(String datos){
-        if(false == datos.isEmpty() ){
-            String[] binarios = datos.split(",");
-            if(binarios.length > 0){
-                this.mySistemaBinario = new SistemaBinario();
-                for (String registro : binarios) {
-                    if(false == registro.isEmpty()){
-                        
-                        this.mySistemaBinario.add(new Binario(registro));
-                    }
-                }
-            }
-        }    
-    }
-    
-    private void mostrarBinarios(){
-       mostraBinariosOperacion();
-       mostraBinariosConversiones();
-    }
-    
-    private void mostraBinariosOperacion(){
-        comboOperacionBinario1.removeAllItems();
-        comboOperacionBinario2.removeAllItems();
-        for(Binario binario : this.mySistemaBinario.getBinarios()){
-            comboOperacionBinario1.addItem(binario.toString());
-            comboOperacionBinario2.addItem(binario.toString());
-        } 
-    }
-    
-    private void mostraBinariosConversiones(){
-        comboConversionBinario1.removeAllItems();
-        for(Binario binario : this.mySistemaBinario.getBinarios()){
-            comboConversionBinario1.addItem(binario.toString());
-        }
-    }
+
     private void comboOperacionBinario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOperacionBinario1ActionPerformed
         this.getResultadoOperacion();
     }//GEN-LAST:event_comboOperacionBinario1ActionPerformed
@@ -555,11 +541,11 @@ public class FormBinario extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox7ActionPerformed
 
     private void comboConversionBinario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConversionBinario1ActionPerformed
-        // TODO add your handling code here:
+       getResultadoOperacionConversion();
     }//GEN-LAST:event_comboConversionBinario1ActionPerformed
 
     private void comboConversionOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConversionOperacionActionPerformed
-        // TODO add your handling code here:
+       getResultadoOperacionConversion();
     }//GEN-LAST:event_comboConversionOperacionActionPerformed
 
     private void comboOperacionAdicionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOperacionAdicionalActionPerformed
@@ -571,24 +557,126 @@ public class FormBinario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonBorrarDatosActionPerformed
 
     private void textDatosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDatosKeyPressed
-        this.isEnabledRemoverDatos();
+       
     }//GEN-LAST:event_textDatosKeyPressed
 
     private void textDatosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDatosFocusLost
-       this.isEnabledRemoverDatos();
+      // this.isEnabledRemoverDatos();
     }//GEN-LAST:event_textDatosFocusLost
 
+    private void textDatosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDatosKeyReleased
+       this.isEnabledRemoverDatos();
+    }//GEN-LAST:event_textDatosKeyReleased
+
+    private void cargarDatos(){
+        if(true == this.toggleCargarDatos.isSelected()){
+           boolean datosCargados = cargarDatos(textDatos.getText());
+           if( datosCargados ){
+                this.enabledAll();
+                setEnabledCargarDatos(false);
+                this.getResultadoOperacionAdicional();
+                this.getResultadoOperacionConversion();
+           }else{
+               this.setEnabledCargarDatos(true);
+           }
+       }else{
+           this.setEnabledCargarDatos(true);
+           this.mySistemaBinario = new SistemaBinario();
+           this.disabledAll();
+       }
+    }
+    
+    private boolean cargarDatos(String datos){
+        this.setMySistemaBinario(datos);
+        if(this.mySistemaBinario != null && this.mySistemaBinario.getBinarios() != null){
+           mostrarBinarios();
+           return true;
+        }else{
+           this.showMessageBinariosInvalidos();
+           return false;
+        }
+        
+    }
+    
+    private void showMessageBinariosInvalidos(){
+        String input = textDatos.getText();
+        if(input.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe digitar almenos un numero binario");
+        }else{
+            String[] cadena = input.split(",");
+            if(cadena.length <= 0){
+                 JOptionPane.showMessageDialog(this, "Recuerde separa los binarios con comas \n Eje:  001 , 101 ");
+            }else{
+                boolean numeroNoValido = false;
+                for(String numero : cadena){
+                    if( false ==  numero.replaceAll("0", "").replaceAll("1", "").isEmpty()){
+                        numeroNoValido = true;
+                    }
+                }
+                if(numeroNoValido){
+                   JOptionPane.showMessageDialog(this, "Solo ingreso binarios con 1 y 0 \n Eje:  001 , 101 ");
+                }
+            }
+        }
+    }
+    
+    private void setMySistemaBinario(String datos){
+        if(false == datos.isEmpty() ){
+            String[] binarios = datos.split(",");
+            if(binarios.length > 0){
+                this.mySistemaBinario = new SistemaBinario();
+                for (String registro : binarios) {
+                    if(false == registro.isEmpty()){
+                        
+                        this.mySistemaBinario.add(new Binario(registro));
+                    }
+                }
+            }
+        }    
+    }
+    
+    private void mostrarBinarios(){
+            mostraBinariosOperacion();
+            mostraBinariosConversiones();
+    }
+    
+    private void mostraBinariosOperacion(){
+        comboOperacionBinario1.removeAllItems();
+        comboOperacionBinario2.removeAllItems();
+        for(Binario binario : this.mySistemaBinario.getBinarios()){
+            comboOperacionBinario1.addItem(binario.toString());
+            comboOperacionBinario2.addItem(binario.toString());
+        } 
+    }
+    
+    private void mostraBinariosConversiones(){
+        comboConversionBinario1.removeAllItems();
+        for(Binario binario : this.mySistemaBinario.getBinarios()){
+            comboConversionBinario1.addItem(binario.toString());
+        }
+    }
+    
     private void isEnabledRemoverDatos(){
         String datos = textDatos.getText();
         if(false == datos.isEmpty()){
             botonBorrarDatos.setEnabled(true);
+            this.setEnabledCargarDatos(true);
+        }else{
+            botonBorrarDatos.setEnabled(false);
+            this.toggleCargarDatos.setEnabled(false);
         }
     }
     
     private void removerDatos(){
         textDatos.setText("");
+        this.mySistemaBinario = new SistemaBinario();
         botonBorrarDatos.setEnabled(false);
+        this.setEnabledCargarDatos(true);
+        this.toggleCargarDatos.setEnabled(false);
+        this.disabledAll();
     }
+    
+    
     private void getResultadoOperacion(){
         int binario1 = comboOperacionBinario1.getSelectedIndex();
         String operacion = this.comboOperacion.getSelectedItem().toString();
@@ -615,9 +703,31 @@ public class FormBinario extends javax.swing.JFrame {
         return resultado;
     }
     
+    private void getResultadoOperacionConversion(){
+        int binario1 = comboConversionBinario1.getSelectedIndex();
+        String operacion = this.comboConversionOperacion.getSelectedItem().toString();
+        if(binario1 != -1){
+            String resultado = this.getOperacionConversion(operacion, binario1);
+            textConversionResultado.setText(resultado); 
+        }
+        
+    }
+    
+    private String getOperacionConversion(String operacion, int binario){
+        String resultado = "";
+        if(operacion.equalsIgnoreCase("Decimal")){
+            resultado = ""+this.mySistemaBinario.getDecimal(binario);
+        }
+        if(operacion.equalsIgnoreCase("Hexadecimal") ){
+            resultado = this.mySistemaBinario.getHexaDecimal(binario);
+        }
+        return resultado;
+    }
+    
     private void getResultadoOperacionAdicional(){
         String operacion = comboOperacionAdicional.getSelectedItem().toString();
-        
+        String resultado = getOperacionAdicional(operacion);
+        textOperacionAdicionalResultado.setText(resultado);
     }
     
     private String getOperacionAdicional(String operacion){
@@ -629,12 +739,49 @@ public class FormBinario extends javax.swing.JFrame {
             resultado = this.mySistemaBinario.getMayor().toString();
         }
         if(operacion.equalsIgnoreCase("Obtener el Binario que más se repite")){
-           // resultado = this.mySistemaBinario.getMas_SeRepite();
+            Binario[] masRepetido = this.mySistemaBinario.getMas_SeRepite();
+            resultado = masRepetido[0].toString();
         }
         if(operacion.equalsIgnoreCase("Obtener Suma Total")){
             resultado = this.mySistemaBinario.getSumaTotal().toString();
         }
         return resultado;
+    }
+    
+    private void disabledAll(){
+        boolean enabled = false; 
+        setEnabledAll(enabled);
+    }
+    
+    private void enabledAll(){
+        boolean enabled = true; 
+        setEnabledAll(enabled);        
+    }
+    
+    private void setEnabledAll(boolean enabled){
+        this.comboConversionBinario1.setEnabled(enabled);
+        this.comboConversionOperacion.setEnabled(enabled);
+        this.comboOperacion.setEnabled(enabled);
+        this.comboOperacionAdicional.setEnabled(enabled);
+        this.comboOperacionBinario1.setEnabled(enabled);
+        this.comboOperacionBinario2.setEnabled(enabled);
+        this.textConversionResultado.setEnabled(enabled);
+        this.textOperacionAdicionalResultado.setEnabled(enabled);
+        this.textOperacionResultado.setEnabled(enabled);
+    }
+    
+    private void setEnabledCargarDatos(boolean enabled){
+        if(enabled){
+            textDatos.setEnabled(true);
+            this.toggleCargarDatos.setEnabled(true);
+            this.toggleCargarDatos.setText(cargar);
+            this.toggleCargarDatos.setSelected(false);
+            this.textDatos.requestFocus();
+        }else{
+            textDatos.setEnabled(false);
+            this.toggleCargarDatos.setText(editar);
+            this.toggleCargarDatos.setSelected(true);
+        }
     }
    
     
@@ -707,6 +854,7 @@ public class FormBinario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelBody;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField textConversionResultado;
     private javax.swing.JTextField textDatos;
